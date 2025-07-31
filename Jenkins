@@ -14,7 +14,7 @@ pipeline {
     stages {
         stage('Checkout Code') {
             steps {
-                git branch: 'POC_CD_Harness',  // Replace with your branch name
+                git branch: 'main',  // Replace with your branch name
                     credentialsId: 'github', // Set up in Jenkins Credentials
                     url: 'https://github.com/mshr07/Deloitte-test'
             }
