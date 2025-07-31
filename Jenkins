@@ -35,7 +35,7 @@ pipeline {
         stage('SonarQube Analysis') {
             steps {
                 withSonarQubeEnv('SonarQube') {
-                    sh 'mvn sonar:sonar -Dsonar.projectKey=Spring-Boot-Login-App -Dsonar.host.url=http://10.104.59.198:9000 -Dsonar.login=sqa_7ad3a4fbb42fa95a33d3c099f34282975f684b86 -Dsonar.coverage.jacoco.xmlReportPaths=/home/jenkins/agent/workspace/Demo/target/site/jacoco/jacoco.xml'
+                    sh 'mvn sonar:sonar -Dsonar.projectKey=Spring-Boot-Login-App -Dsonar.host.url=http:// 10.1.0.14:9000 -Dsonar.login=sqa_7ad3a4fbb42fa95a33d3c099f34282975f684b86 -Dsonar.coverage.jacoco.xmlReportPaths=/home/jenkins/agent/workspace/Demo/target/site/jacoco/jacoco.xml'
                 }
             }
 			}
