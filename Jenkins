@@ -16,7 +16,7 @@ pipeline {
             steps {
                 git branch: 'POC_CD_Harness',  // Replace with your branch name
                     credentialsId: 'github', // Set up in Jenkins Credentials
-                    url: 'https://github.com/Deloitte-Default/carnia.git'
+                    url: 'https://github.com/mshr07/carnia.git'
             }
         }
         stage('Build') {
