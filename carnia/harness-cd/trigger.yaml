@@ -1,0 +1,19 @@
+trigger:
+ name: Auto-Deploy
+ identifier: auto_deploy
+ projectIdentifier: Poc_project
+ orgIdentifier: default
+ pipelineIdentifier: deploy_spring_boot
+ source:
+   type: Webhook
+   spec:
+     type: Github
+     spec:
+       connectorRef: github_connector
+       repoName: carnia
+       autoAbortPreviousExecutions: false
+       event: Push
+       filter:
+         type: Branch
+         spec:
+           branch: POC_CD_Harness

@@ -1,0 +1,48 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: jenkins
+  namespace: default
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: jenkins
+  template:
+    metadata:
+      labels:
+        app: jenkins
+    spec:
+      containers:
+      - name: jenkins
+        image: anunarayan/myjenkins-docker
+        resources:
+          requests:
+            memory: "2Gi"
+            cpu: "1000m"
+          limits:
+            memory: "4Gi"
+            cpu: "2000m"
+        ports:
+        - containerPort: 8080
+        - containerPort: 50000
+        env:
+        - name: CHROME_BIN
+          value: "/usr/bin/google-chrome"
+        volumeMounts:
+        - name: jenkins-home
+          mountPath: /var/jenkins_home
+        - name: docker-socket
+          mountPath: /var/run/docker.sock
+        - name: google-chrome-bin
+          mountPath: /usr/bin/google-chrome
+      volumes:
+      - name: jenkins-home
+        persistentVolumeClaim:
+          claimName: jenkins-pvc
+      - name: docker-socket
+        hostPath:
+          path: /var/run/docker.sock
+      - name: google-chrome-bin
+        hostPath:
+          path: /usr/bin/google-chrome

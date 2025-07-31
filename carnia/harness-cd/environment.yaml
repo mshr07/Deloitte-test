@@ -1,0 +1,13 @@
+environment:
+ name: local-k8s
+ identifier: local_k8s
+ type: PreProduction
+ orgIdentifier: default
+ projectIdentifier: Poc_project
+ infrastructureDefinitions:
+   - identifier: local_k8s_infra
+     type: KubernetesDirect
+     spec:
+       connectorRef: k8s_connector
+       namespace: default
+       releaseName: spring-boot-login
