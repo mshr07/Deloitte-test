@@ -1,0 +1,12 @@
+infrastructureDefinition:
+ name: local_k8s_infra
+ identifier: local_k8s_infra
+ projectIdentifier: Poc_Project
+ orgIdentifier: Default
+ environmentRef: local_k8s
+ deploymentType: Kubernetes
+ type: KubernetesDirect
+ spec:
+   connectorRef: docker_desktop_k8s
+   namespace: default
+   releaseName: spring-boot-app

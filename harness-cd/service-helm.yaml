@@ -1,0 +1,21 @@
+service:
+  name: spring_boot_login_helm
+  identifier: spring_boot_login_helm
+  orgIdentifier: default
+  projectIdentifier: Poc_project
+  serviceDefinition:
+    type: Kubernetes
+    spec:
+      manifests:
+        - manifest:
+            identifier: helm_manifest_new
+            type: HelmChart
+            spec:
+              store:
+                type: Github
+                spec:
+                  connectorRef: k8s_manifest
+                  gitFetchType: Branch
+                  folderPath: spring-boot-login-helm
+                  branch: POC_CD_Harness
+              helmVersion: V3

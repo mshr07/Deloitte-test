@@ -1,0 +1,30 @@
+service:
+  name: spring-boot-login
+  identifier: spring_boot_login
+  orgIdentifier: default
+  projectIdentifier: Poc_project
+  serviceDefinition:
+    type: Kubernetes
+    spec:
+      manifests:
+        - manifest:
+            identifier: k8s_manifest
+            type: K8sManifest
+            spec:
+              store:
+                type: Github
+                spec:
+                  connectorRef: k8s_manifest
+                  gitFetchType: Branch
+                  repoName: carnia
+                  branch: POC_CD_Harness
+                  paths:
+                    - k8s/deployment.yaml
+                    - k8s/service.yaml
+      artifacts:
+        primary:
+          type: DockerRegistry
+          spec:
+            connectorRef: jfrog
+            imagePath: springboot-docker/springbootjfrog
+            tag: latest

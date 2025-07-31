@@ -1,0 +1,49 @@
+pipeline:
+  name: Deploy Spring Boot App
+  identifier: deploy_spring_boot
+  projectIdentifier: Poc_project
+  orgIdentifier: default
+  tags: {}
+  stages:
+    - stage:
+        name: Deploy
+        identifier: deploy
+        type: Deployment
+        spec:
+          deploymentType: Kubernetes
+          service:
+            serviceRef: spring_boot_login
+          environment:
+            environmentRef: local_k8s
+            deployToAll: false
+            infrastructureDefinitions:
+              - identifier: local_k8s_infra
+          execution:
+            steps:
+              - step:
+                  name: Fetch Manifests
+                  identifier: fetch_manifests
+                  type: K8sApply
+                  spec:
+                    filePaths:
+                      - k8s/deployment.yaml
+                      - k8s/service.yaml
+                    skipDryRun: false
+                    skipSteadyStateCheck: false
+                    skipRendering: false
+                    overrides: []
+                  timeout: 10m
+              - step:
+                  name: Deploy to Kubernetes
+                  identifier: deploy_k8s
+                  type: K8sRollingDeploy
+                  spec:
+                    skipDryRun: false
+            rollbackSteps: []
+        failureStrategies:
+          - onFailure:
+              errors:
+                - AllErrors
+              action:
+                type: Ignore
+        tags: {}
